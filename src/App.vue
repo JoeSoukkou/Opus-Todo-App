@@ -1,32 +1,89 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+          Opus
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            Be Productive.
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list
+        dense
+        nav
+      >
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          :to="item.to"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon color="grey darken-2">{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar
+      app
+      dark
+      src="1_dP81IJq-tGFxy1rIK3RYsg.png"
+      scroll-target="#scrolling-techniques-2"
+      
+    
+    >
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          
+        ></v-img>
+      </template>
+
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-app-bar-title>Opus - Be Productive</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+
+  
+
+    </v-app-bar>
+
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+     <v-footer padless>
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      © {{ new Date().getFullYear() }} Built by Y. Soukkou — <strong>Opus</strong>
+    </v-col>
+  </v-footer>
+  </v-app>
+  
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+  export default {
+    data: () => ({
+       drawer: null, 
+        items: [
+          { title: 'Tasks', icon: 'mdi-format-list-checks', to: "/"},
+          { title: 'About', icon: 'mdi-information', to: "/about"},
+        ], 
+       
+       }),
   }
-}
-</style>
+</script>
